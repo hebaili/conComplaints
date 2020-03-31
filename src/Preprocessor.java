@@ -31,7 +31,6 @@ public class Preprocessor {
         preprocess data by extracting Date received, Product, Company
         steps: Read CSV
          */
-        // Read CSV
         String csvFilePath = inputFile;
         BufferedReader br = null;
         String line = "";
@@ -52,7 +51,12 @@ public class Preprocessor {
             }
 
 
-            // use comma as separator
+            /*
+            Use comma as seperator
+            Deal with cases like
+            "2019-01-01, product A,
+            sub product of A"
+             */
             ArrayList<String> temp = new ArrayList<String>(Arrays.asList(line.split(cvsSplitBy)));
             if (temp.size() == 0) continue;
             if (date.isValidDate(temp.get(0))) {
@@ -64,15 +68,11 @@ public class Preprocessor {
             }
 
 
-
-            // skip the first line
-            //if (complaint.get(0) == "Date Received") continue;
-
+            // deal with cases like "abc, def" (delimiter inside double quote)
             int startidx = -1;
             for (int i = 0; i < complaint.size(); i++) {
                 if (!complaint.get(i).isEmpty() && complaint.get(i).charAt(0) == '"') {
                     startidx = i;
-                    //System.out.println("start");
                 }
                 if (!complaint.get(i).isEmpty() && complaint.get(i).charAt(complaint.get(i).length()-1) == '"' && startidx > -1) {
                     String joinComplaint = complaint.subList(startidx, i+1).stream().collect(Collectors.joining(","));
@@ -83,23 +83,13 @@ public class Preprocessor {
                 }
             }
 
-            if (complaint.size() <=8) {
-                for (int i = 0; i < complaint.size(); i++) {
-                    System.out.println(i);
-                    System.out.println(complaint.get(i));
-                }
-                System.out.println("Finished");
-                System.out.println(line);
-            }
+
+            /*
+            Extract Year, Product and Company
+            Add " at the beginning and end of product name when there is comma present
+            According to the given test case, product name should be in lower case
+             */
             String[] currData = { complaint.get(0).substring(0,4), complaint.get(1).replaceAll("^\"|\"$", ""), complaint.get(7).replaceAll("^\"|\"$", "")};
-            // skip the first line
-            //if (currData[0] == "Date") continue;
-
-            // Processes uncleaned data in currData[2], which is product
-            //String product = currData[1];
-            // Check if the product is supposed to be a sub product
-
-            //currData[1] = processProduct(product);
             if (currData[1].indexOf(",") != -1 && currData[1].charAt(0) != '"' && currData[1].charAt(currData[1].length() - 1) != '"') {
                 currData[1] = "\"" + currData[1] + "\"";
             }

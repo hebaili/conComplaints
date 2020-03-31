@@ -10,11 +10,11 @@ public class Analyzer {
     /*
     Analyzes preprocessed data and output report
 
-    @input1: preprocessed data: year, product, company
+    @input: preprocessed data: year, product, company
 
-    Find: total number of complaints received per product per year
-          counting of companies (#complaints > 1) each year
-          highest percentage (rounded to the nearest whole number) of total complaints filed against one company for that product and year
+    Calculate: total number of complaints received per product per year
+               counting of companies (#complaints > 1) each year
+               highest percentage (rounded to the nearest whole number) of total complaints filed against one company for that product and year
 
     @output: report.csv
              product, year, counting of companies each year, counting of companies(#complaints > 1), highest percentage
@@ -23,11 +23,10 @@ public class Analyzer {
 
     static File output_file;
 
-    // Key: Product - Year, value: HashMap with key = company ,value = complaints against that company
+    // Key: "Product - Year", value: HashMaps (with key = company ,value = complaints against that company)
     static Map<String, Map<String,Integer>> product_year_category_map;
 
     // Key: Year, value: list of companies that have complaints file in that year
-    //static Map<String,List<String>> company_list_per_year;
     List<List<String>> result;
 
 
@@ -36,12 +35,11 @@ public class Analyzer {
     public Analyzer() {
         output_file = null;
         product_year_category_map = new HashMap<>();
-        //company_list_per_year = new HashMap<>();
     }
 
     /*
     @param: inputFile
-    @output: updated product_year_category_map and company_list_per_year in order to generate report
+    @output: updated product_year_category_map in order to generate report
      */
     public static void analyze(String inputFile) throws IOException {
         // Read from input file
@@ -59,14 +57,12 @@ public class Analyzer {
             // use comma as separator
             ArrayList<String> info = new ArrayList<String>(Arrays.asList(line.split(cvsSplitBy)));
 
-            // skip the first line
-            //if (complaint.get(0) == "Date Received") continue;
 
             int startIdx = -1;
             for (int i = 0; i < info.size(); i++) {
                 if (!info.get(i).isEmpty() && info.get(i).charAt(0) == '"') {
                     startIdx = i;
-                    //System.out.println("start");
+
                 }
                 if (!info.get(i).isEmpty() && info.get(i).charAt(info.get(i).length()-1) == '"' && startIdx > -1) {
                     String joinComplaint = info.subList(startIdx, i+1).stream().collect(Collectors.joining(","));
@@ -75,9 +71,6 @@ public class Analyzer {
                     i = startIdx;
                     startIdx = -1;
                 }
-                //System.out.println(complaint);
-                //System.out.println(complaint.get(i));
-                //System.out.println(complaint.size());
             }
 
 
@@ -93,14 +86,13 @@ public class Analyzer {
                 }
             }
         }
-        //System.out.println((product_year_category_map));
     }
 
     public void generateReport(String inputFile) throws IOException {
         analyze(inputFile); // maps updated
 
         // Iterate through product_year_category_map
-        //put information in List<List<String>>
+        // Put information in List<List<String>>
         result = new ArrayList<>();
         for (String productYear: product_year_category_map.keySet()) {
             String[] str = productYear.split("-");
@@ -136,7 +128,6 @@ public class Analyzer {
 
         for (int row = 0; row < result.size(); row++) {
             for (int col = 0; col < 5; col++) {
-                System.out.println(result.get(row).get(col));
                 bwr.write(result.get(row).get(col));
                 if (col < 4) {
                     bwr.write(",");
@@ -153,18 +144,17 @@ public class Analyzer {
     }
 }
 
+
+// self defined comparator to sort product in alphabetical order and year in ascending order
 class ListComparator<T extends Comparable<T>> implements Comparator<List<T>> {
 
     @Override
     public int compare(List<T> o1, List<T> o2) {
-        //for (int i = 0; i < Math.min(o1.size(), o2.size()); i++) {
         int c = o1.get(0).compareTo(o2.get(0));
         if (c != 0 ) {
             return c;
         }
         return o1.get(1).compareTo(o2.get(1));
-        //}
-        //return Integer.compare(o1.size(), o2.size());
     }
 
 }
