@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3398f451-4c66-44a9-a27e-b909d1368a61" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Analyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Preprocessor.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

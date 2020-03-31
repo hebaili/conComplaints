@@ -106,7 +106,7 @@ public class Preprocessor {
 
 
             // write processed data into csv file
-
+            currData[0] = currData[0].toLowerCase();
             for (int i = 0; i < 3; i++) {
                 bwr.write(currData[i]);
                 if (i < 2) {
