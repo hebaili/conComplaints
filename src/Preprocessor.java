@@ -103,10 +103,10 @@ public class Preprocessor {
             if (currData[1].indexOf(",") != -1 && currData[1].charAt(0) != '"' && currData[1].charAt(currData[1].length() - 1) != '"') {
                 currData[1] = "\"" + currData[1] + "\"";
             }
+            currData[1] = currData[1].toLowerCase();
 
 
             // write processed data into csv file
-            currData[0] = currData[0].toLowerCase();
             for (int i = 0; i < 3; i++) {
                 bwr.write(currData[i]);
                 if (i < 2) {
