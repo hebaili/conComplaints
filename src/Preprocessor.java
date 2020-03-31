@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-
 public class Preprocessor {
-    //public File output_file = null;
     /*
     Preprocess raw data
     Extracting useful columns: Date received, Product, Company
@@ -15,15 +13,9 @@ public class Preprocessor {
     @param: raw data
 
     @output: processed date received, product, Company
-
      */
 
-    //File output_file;
-
-
-
     public Preprocessor() {
-       // output_file = null;
     }
 
     public void preprocess(String inputFile) throws IOException {
@@ -36,10 +28,8 @@ public class Preprocessor {
         String line = "";
         String cvsSplitBy = ",";
 
-
         FileWriter writer = new FileWriter("preprocessed.csv");
         BufferedWriter bwr = new BufferedWriter(writer);
-
 
         ArrayList<String> complaint = new ArrayList<>();
         br = new BufferedReader(new FileReader(csvFilePath));
@@ -49,7 +39,6 @@ public class Preprocessor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
             /*
             Use comma as seperator
@@ -67,7 +56,6 @@ public class Preprocessor {
                 if (complaint.size() < 18) continue;
             }
 
-
             // deal with cases like "abc, def" (delimiter inside double quote)
             int startidx = -1;
             for (int i = 0; i < complaint.size(); i++) {
@@ -83,7 +71,6 @@ public class Preprocessor {
                 }
             }
 
-
             /*
             Extract Year, Product and Company
             Add " at the beginning and end of product name when there is comma present
@@ -95,7 +82,6 @@ public class Preprocessor {
             }
             currData[1] = currData[1].toLowerCase();
 
-
             // write processed data into csv file
             for (int i = 0; i < 3; i++) {
                 bwr.write(currData[i]);
@@ -104,14 +90,10 @@ public class Preprocessor {
                 }
             }
             bwr.newLine();
-
         }
-
         bwr.close();
     }
 }
-
-
 
 class date {
     public static boolean isValidDate(String inDate) {

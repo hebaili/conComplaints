@@ -1,10 +1,6 @@
 import java.io.*;
 import java.util.*;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Collectors;
-
 
 public class Analyzer {
     /*
@@ -16,7 +12,7 @@ public class Analyzer {
                counting of companies (#complaints > 1) each year
                highest percentage (rounded to the nearest whole number) of total complaints filed against one company for that product and year
 
-    @output: report.csv
+    @output: report.csv:
              product, year, counting of companies each year, counting of companies(#complaints > 1), highest percentage
              ordered by product(alphabetical), year(ascending)
      */
@@ -26,7 +22,6 @@ public class Analyzer {
     // Key: "Product - Year", value: HashMaps (with key = company ,value = complaints against that company)
     static Map<String, Map<String,Integer>> product_year_category_map;
 
-
     // Each List<String>:
     // Year,
     // product,
@@ -34,9 +29,6 @@ public class Analyzer {
     // counting of companies (#complaints > 1) each year
     // highest percentage
     List<List<String>> result;
-
-
-
 
     public Analyzer() {
         output_file = null;
@@ -63,12 +55,10 @@ public class Analyzer {
             // use comma as separator
             ArrayList<String> info = new ArrayList<String>(Arrays.asList(line.split(cvsSplitBy)));
 
-
             int startIdx = -1;
             for (int i = 0; i < info.size(); i++) {
                 if (!info.get(i).isEmpty() && info.get(i).charAt(0) == '"') {
                     startIdx = i;
-
                 }
                 if (!info.get(i).isEmpty() && info.get(i).charAt(info.get(i).length()-1) == '"' && startIdx > -1) {
                     String joinComplaint = info.subList(startIdx, i+1).stream().collect(Collectors.joining(","));
@@ -78,7 +68,6 @@ public class Analyzer {
                     startIdx = -1;
                 }
             }
-
 
             String productYear = info.get(1) + "-" + info.get(0);
             if (!product_year_category_map.containsKey(productYear)) {
@@ -127,11 +116,9 @@ public class Analyzer {
         }
         Collections.sort(result,new ListComparator<>());
 
-
         // write csv
         FileWriter writer = new FileWriter("../output/report.csv");
         BufferedWriter bwr = new BufferedWriter(writer);
-
 
         for (int row = 0; row < result.size(); row++) {
             for (int col = 0; col < 5; col++) {
@@ -143,15 +130,12 @@ public class Analyzer {
             bwr.newLine();
         }
         bwr.close();
-
     }
-
 
     private int calculatePercentage(double maxComplaint, double totalComplaint) {
         return (int) Math.round(maxComplaint/totalComplaint*100);
     }
 }
-
 
 // self defined comparator to sort product in alphabetical order and year in ascending order
 class ListComparator<T extends Comparable<T>> implements Comparator<List<T>> {
