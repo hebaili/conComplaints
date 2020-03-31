@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Main {
 
 
-    //static String input = "complaints2.csv";
+    static String input = "../input/complaints.csv";
     //static String preprocessed;
 
 
@@ -20,7 +20,7 @@ public class Main {
             System.out.println(argument);
         }
         Preprocessor preprocessor = new Preprocessor();
-        preprocessor.preprocess(args[0]);
+        preprocessor.preprocess(input);
         Analyzer analyzer = new Analyzer();
 //        preprocessed = preprocessor.output_file.getAbsolutePath();
         analyzer.generateReport("preprocessed.csv");
