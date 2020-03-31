@@ -93,7 +93,7 @@ public class Analyzer {
                 }
             }
         }
-        System.out.println((product_year_category_map));
+        //System.out.println((product_year_category_map));
     }
 
     public void generateReport(String inputFile) throws IOException {
@@ -130,7 +130,7 @@ public class Analyzer {
 
 
         // write csv
-        FileWriter writer = new FileWriter("./insight_testsuite/tests/test3/output/report.csv");
+        FileWriter writer = new FileWriter("report.csv");
         BufferedWriter bwr = new BufferedWriter(writer);
 
 
