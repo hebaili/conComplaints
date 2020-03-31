@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd  ./src
-pwd ./input
-ls ../
+pwd .
+ls ../input
 javac Main.java
 
 java Main
