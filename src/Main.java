@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Main {
 
-    static String input = "./src/tests/test3/input/complaints.csv";
+    static String input = "complaints2.csv";
     //static String preprocessed;
 
 
@@ -18,7 +18,7 @@ public class Main {
         preprocessor.preprocess(input);
         Analyzer analyzer = new Analyzer();
 //        preprocessed = preprocessor.output_file.getAbsolutePath();
-        analyzer.generateReport("./src/preprocessed.csv");
+        analyzer.generateReport("preprocessed.csv");
 
 
     }
