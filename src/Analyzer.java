@@ -81,16 +81,6 @@ public class Analyzer {
             }
 
 
-            //String[] info = line.split(cvsSplitBy);
-
-            // info[0]: year, info[1]: product, info[2]: company
-            // Update company_list_per_year
-            //if (!company_list_per_year.containsKey(info[0])) {
-            //    company_list_per_year.put(info[0],new ArrayList<>());
-            //}
-            //company_list_per_year.get(info[0]).add(info[2]);
-
-            // Update product_year_category_map
             String productYear = info.get(1) + "-" + info.get(0);
             if (!product_year_category_map.containsKey(productYear)) {
                 product_year_category_map.put(productYear,new HashMap<>());
