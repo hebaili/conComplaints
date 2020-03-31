@@ -140,7 +140,7 @@ public class Analyzer {
 
 
         // write csv
-        FileWriter writer = new FileWriter("/Users/bailihe/IdeaProjects/conComplaints/insight_testsuite/tests/test3/output/report.csv");
+        FileWriter writer = new FileWriter("./insight_testsuite/tests/test3/output/report.csv");
         BufferedWriter bwr = new BufferedWriter(writer);
 
 
