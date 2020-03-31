@@ -1,5 +1,5 @@
 #!/bin/bash
 
-javac ./src/Main.java
+javac -cp ../Main.java
 
-java ./src/Main
+java -cp ../Main
