@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd  ./src
-pwd .
+pwd ./input
 ls ../
 javac Main.java
 
