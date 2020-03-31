@@ -10,19 +10,13 @@ public class Main {
 
 
     static String input = "../input/complaints.csv";
-    //static String preprocessed;
 
 
     public static void main(String[] args) throws IOException {
-	// write your code here
-        for (String argument : args) {
-            // do something with the argument
-            System.out.println(argument);
-        }
+
         Preprocessor preprocessor = new Preprocessor();
         preprocessor.preprocess(input);
         Analyzer analyzer = new Analyzer();
-//        preprocessed = preprocessor.output_file.getAbsolutePath();
         analyzer.generateReport("preprocessed.csv");
 
 

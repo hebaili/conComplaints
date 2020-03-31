@@ -26,7 +26,13 @@ public class Analyzer {
     // Key: "Product - Year", value: HashMaps (with key = company ,value = complaints against that company)
     static Map<String, Map<String,Integer>> product_year_category_map;
 
-    // Key: Year, value: list of companies that have complaints file in that year
+
+    // Each List<String>:
+    // Year,
+    // product,
+    // total number of complaints received per product per year,
+    // counting of companies (#complaints > 1) each year
+    // highest percentage
     List<List<String>> result;
 
 
@@ -110,6 +116,7 @@ public class Analyzer {
             int totalCompanies = product_year_category_map.get(productYear).size();
             int percentage = calculatePercentage(Double.valueOf(maxComplaintAgainstOneCompany),Double.valueOf(totalComplaints));
 
+            // Write information into List<String> and add to result
             List<String> curr = new ArrayList<>();
             curr.add(product);
             curr.add(year);
@@ -138,6 +145,7 @@ public class Analyzer {
         bwr.close();
 
     }
+
 
     private int calculatePercentage(double maxComplaint, double totalComplaint) {
         return (int) Math.round(maxComplaint/totalComplaint*100);
