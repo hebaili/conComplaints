@@ -38,7 +38,7 @@ public class Preprocessor {
         String cvsSplitBy = ",";
 
 
-        FileWriter writer = new FileWriter("./src/preprocessed.csv");
+        FileWriter writer = new FileWriter("preprocessed.csv");
         BufferedWriter bwr = new BufferedWriter(writer);
 
 
